@@ -5,11 +5,14 @@ using System.Threading;
 using System.IO;
 using Sys = Cosmos.System;
 using Cosmos.System.Graphics;
+using CoderdojoOS2;
 
 namespace CoderdojoOS
 {
     public class Kernel : Sys.Kernel
     {
+
+
 
         public static string ver = "pre alpha 1.1";
         public static uint build = 7;
@@ -19,7 +22,7 @@ namespace CoderdojoOS
         public bool crash = false;
 
         public FormatException ex;
-
+        public static string cmd;
         protected override void BeforeRun()
         {
             Console.WriteLine("Coderdojo OS " + ver + " build " + build);
@@ -30,13 +33,15 @@ namespace CoderdojoOS
 
         protected override void Run()
         {
+            //logowanie sie
             Console.Write("Login: ");
             var login = Console.ReadLine();
             Console.Write("\nHasło: ");
             var pass = Console.ReadLine();
-            if (login == "root" && pass == "toor")
+            if (login == User.login && pass == User.password)
             {
                 Console.WriteLine("\nHasło zaakceptowane\n");
+
                 while (true)
                 {
                     if (crash == true)
@@ -46,7 +51,7 @@ namespace CoderdojoOS
                     try
                     {
                         Console.Write(login + ">");
-                        string cmd = Console.ReadLine();
+                         cmd = Console.ReadLine();
                         if (cmd == "logout")
                         {
                             break;
@@ -57,7 +62,7 @@ namespace CoderdojoOS
                         }
                     }
                     catch (FormatException e)
-                    { 
+                    {
                         crash = true;
                         ex = e;
                     }
@@ -94,8 +99,8 @@ namespace CoderdojoOS
         public string[] command = new string[Int32.MaxValue];
         public void Handler(string rawCommand)
         {
-            
-            
+
+
             command = rawCommand.Split(" ");
 
             string commandName = command[0].ToLower();
@@ -116,6 +121,23 @@ namespace CoderdojoOS
             {
                 Sys.Power.Reboot();
             }
+            else if (cmd == "change password")
+            {
+                try
+                {
+                    string passwd;
+                    Console.Write("actual password: ");
+                    passwd = Console.ReadLine();
+                    if (passwd == User.password)
+                    {
+                        NewPassword();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
             else if (commandName == "shutdown")
             {
                 Sys.Power.Shutdown();
@@ -130,10 +152,19 @@ namespace CoderdojoOS
             }
             else if (commandName == "bgcolor")
             {
-                Bgcolor(command[1]);
+                try
+                {
+                    Bgcolor(command[1]);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex);
+                }
             }
             else if (commandName == "textcolor")
             {
+
                 Textcolor(command[1]);
             }
             else if (commandName == "pause")
@@ -162,12 +193,25 @@ namespace CoderdojoOS
                     Console.WriteLine(ex);
                 }
             }
+            else if (cmd == "user info")
+            {
+                try
+                {
+                    UserInfo();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
             else
             {
                 Console.WriteLine(commandName + ": Nie znaleziono polecenia");
             }
         }
-
+        //#############################//
+        //          metody             //
+        //#############################//
         public void Crash(string code)
         {
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -181,7 +225,7 @@ namespace CoderdojoOS
             Console.ReadKey();
             Sys.Power.Reboot();
         }
-        
+
         public void Wait(string wait1)
         {
             try
@@ -194,92 +238,92 @@ namespace CoderdojoOS
                 Console.WriteLine("Błąd: " + ex + "\n");
             }
         }
-            //zmienia kolor tła
+        //zmienia kolor tła
         public void Bgcolor(string color1)
         {
-          
 
-                    string color = color1.ToLower();
-                switch(color)
-                {
-                    case "blue":
+
+            string color = color1.ToLower();
+            switch (color)
+            {
+                case "blue":
                     {
-                         Console.BackgroundColor = ConsoleColor.Blue;
-                         Console.Clear();
-                        
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.Clear();
+
                         break;
                     }
-                    case "red":
+                case "red":
                     {
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.Clear();
                         break;
                     }
-                    case "green":
+                case "green":
                     {
                         Console.BackgroundColor = ConsoleColor.Green;
                         break;
                     }
-                    case "white":
+                case "white":
                     {
                         Console.BackgroundColor = ConsoleColor.White;
                         break;
                     }
-                    case "black":
+                case "black":
                     {
                         Console.BackgroundColor = ConsoleColor.Black;
                         break;
                     }
-                    case "help":
+                case "help":
                     {
 
                         break;
                     }
-                    default:
-                        {
-                             Console.WriteLine("Nie znaleziono koloru.");
-                             Console.WriteLine("Oto lista kolorów:");
-                             Console.WriteLine("blue");
-                             Console.WriteLine("red");
-                            Console.WriteLine("green");
-                             Console.WriteLine("white");
-                             Console.WriteLine("black");
-                             break;
-                          }
-                        
-                    
-                }
+                default:
+                    {
+                        Console.WriteLine("Nie znaleziono koloru.");
+                        Console.WriteLine("Oto lista kolorów:");
+                        Console.WriteLine("blue");
+                        Console.WriteLine("red");
+                        Console.WriteLine("green");
+                        Console.WriteLine("white");
+                        Console.WriteLine("black");
+                        break;
+                    }
+
+
+            }
         }
 
         public void Textcolor(string color1)
         {
             string color = color1.ToLower();
 
-           
 
-                switch(color)
-                {
-                    case "red":
+
+            switch (color)
+            {
+                case "red":
                     {
-                         Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         break;
                     }
-                    case "white":
+                case "white":
                     {
                         Console.ForegroundColor = ConsoleColor.White;
                         break;
                     }
-                    case "blue":
-                    {
-                         Console.ForegroundColor = ConsoleColor.Blue;
-                         break;
-                    }
-                    case "green":
+                case "blue":
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         break;
                     }
-                    default:
+                case "green":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
+                    }
+                default:
                     {
                         Console.WriteLine("Nie znaleziono koloru");
                         Console.WriteLine("Oto lista kolorów:");
@@ -290,7 +334,7 @@ namespace CoderdojoOS
 
                         break;
                     }
-                }
+            }
 
 
 
@@ -299,7 +343,7 @@ namespace CoderdojoOS
         }
         public void Echo(string[] echoCommand)
         {
-                
+
 
         }
 
@@ -316,10 +360,47 @@ namespace CoderdojoOS
             Console.WriteLine("crash [kod błędu] - wyświetla informacje o błędzie systemu i wymaga ponownego uruchomienia");
             Console.WriteLine("shutdown - wyłącza komputer");
         }
-        public void CreateFile(string Name,string Partition)
+        public void CreateFile(string Name, string Partition)
         {
 
         }
+        public void UserInfo()
+        {
+            Console.WriteLine("login - " + User.name);
+            Console.WriteLine("last name - " + User.lastName);
+            Console.WriteLine("login - " + User.login);
+        }
+        public void NewPassword()
+        {
+            while (true)
+            {
+                Console.WriteLine("nowe haslo: ");
+                var checkPasswd = Console.ReadLine();
+                Console.WriteLine("powtorz nowe haslo: ");
+                var passwd = Console.ReadLine();
+                if (checkPasswd == passwd)
+                {
+                    User.password = passwd;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("hasla sie nie zgadzaja");
+                }
+            }
+
+
+        }
+   
+        
+
+        
+
+            
+
+
+
+        
         //############//
         //shell begone//
         //############//
