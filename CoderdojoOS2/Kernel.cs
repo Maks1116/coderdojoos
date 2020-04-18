@@ -197,43 +197,7 @@ namespace CoderdojoOS
             //zmienia kolor tła
         public void Bgcolor(string color1)
         {
-          /*  string color = color1.ToLower();
-            if (color == "blue")
-            {
-                Console.BackgroundColor = ConsoleColor.Blue;
-                Console.Clear();
-            }
-            else if (color == "red")
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.Clear();
-            }
-            else if (color == "green")
-            {
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.Clear();
-            }
-            else if (color == "white")
-            {
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.Clear();
-            }
-            else if (color == "black")
-            {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.Clear();
-            }
-            else
-            {
-                Console.WriteLine("Nie znaleziono koloru.");
-                Console.WriteLine("Oto lista kolorów:");
-                Console.WriteLine("blue");
-                Console.WriteLine("red");
-                Console.WriteLine("green");
-                Console.WriteLine("white");
-                Console.WriteLine("black");
-            }
-            */
+          
 
                     string color = color1.ToLower();
                 switch(color)
@@ -291,31 +255,47 @@ namespace CoderdojoOS
         {
             string color = color1.ToLower();
 
-            if (color == "red")
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-            }
-            else if (color == "white")
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            else if (color == "blue")
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-            }
-            else if (color == "green")
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            }
-            else
-            {
-                Console.WriteLine("Nie znaleziono koloru");
-                Console.WriteLine("Oto lista kolorów:");
-                Console.WriteLine("blue");
-                Console.WriteLine("red");
-                Console.WriteLine("green");
-                Console.WriteLine("white");
-            }
+           
+
+                switch(color)
+                {
+                    case "red":
+                    {
+                         Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                    }
+                    case "white":
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+                    }
+                    case "blue":
+                    {
+                         Console.ForegroundColor = ConsoleColor.Blue;
+                         break;
+                    }
+                    case "green":
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
+                    }
+                    default:
+                    {
+                        Console.WriteLine("Nie znaleziono koloru");
+                        Console.WriteLine("Oto lista kolorów:");
+                        Console.WriteLine("blue");
+                        Console.WriteLine("red");
+                        Console.WriteLine("green");
+                        Console.WriteLine("white");
+
+                        break;
+                    }
+                }
+
+
+
+
+
         }
         public void Echo(string[] echoCommand)
         {
@@ -340,5 +320,8 @@ namespace CoderdojoOS
         {
 
         }
+        //############//
+        //shell begone//
+        //############//
     }
 }
