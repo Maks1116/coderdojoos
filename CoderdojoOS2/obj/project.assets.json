@@ -1699,11 +1699,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\itcpp\\Desktop\\CoderDojo os\\coderdojoos\\trunk\\CoderdojoOS2\\CoderdojoOS2.csproj",
+      "projectUniqueName": "C:\\Users\\itcpp\\Desktop\\coderdojoos\\trunk\\CoderdojoOS2\\CoderdojoOS2.csproj",
       "projectName": "CoderdojoOS2",
-      "projectPath": "C:\\Users\\itcpp\\Desktop\\CoderDojo os\\coderdojoos\\trunk\\CoderdojoOS2\\CoderdojoOS2.csproj",
+      "projectPath": "C:\\Users\\itcpp\\Desktop\\coderdojoos\\trunk\\CoderdojoOS2\\CoderdojoOS2.csproj",
       "packagesPath": "C:\\Users\\itcpp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\itcpp\\Desktop\\CoderDojo os\\coderdojoos\\trunk\\CoderdojoOS2\\obj\\",
+      "outputPath": "C:\\Users\\itcpp\\Desktop\\coderdojoos\\trunk\\CoderdojoOS2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\itcpp\\AppData\\Roaming\\NuGet\\NuGet.Config",

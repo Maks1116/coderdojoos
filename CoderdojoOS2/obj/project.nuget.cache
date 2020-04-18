@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YD8V8BASt6upLcd9Sq8X2z9uR4/RWqX/v+JThudY0gAbyi9mmmPDGhq9Nwhif0sHobkHDRB0xxZgLevQIS3YGg==",
+  "dgSpecHash": "QAzXMf0gzZ4Rfbla3CsqpWuPPOQzrIZXxEZ7cm5D6O4LNEhSmtUlVL/NRV+k6fSllptQkTEgujrlWmfxdxKI6g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\itcpp\\Desktop\\CoderDojo os\\coderdojoos\\trunk\\CoderdojoOS2\\CoderdojoOS2.csproj",
+  "projectFilePath": "C:\\Users\\itcpp\\Desktop\\coderdojoos\\trunk\\CoderdojoOS2\\CoderdojoOS2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\itcpp\\.nuget\\packages\\cosmos.build\\0.1.0-localbuild20190628100707\\cosmos.build.0.1.0-localbuild20190628100707.nupkg.sha512",
     "C:\\Users\\itcpp\\.nuget\\packages\\cosmos.common\\0.1.0-localbuild20190628100707\\cosmos.common.0.1.0-localbuild20190628100707.nupkg.sha512",

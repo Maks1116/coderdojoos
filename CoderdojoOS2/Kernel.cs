@@ -6,29 +6,37 @@ using System.IO;
 using Sys = Cosmos.System;
 using Cosmos.System.Graphics;
 using CoderdojoOS2;
+using Cosmos.System.FileSystem;
 
 namespace CoderdojoOS
 {
     public class Kernel : Sys.Kernel
     {
-
-
-
-        public static string ver = "pre alpha 1.1";
-        public static uint build = 7;
-
-
+        public static string ver = "pre alpha 2.0";
+        public static uint build = 15;
 
         public bool crash = false;
 
         public FormatException ex;
         public static string cmd;
+        public static CosmosVFS fs = new CosmosVFS();
+
+        public static string ls = @"0:\";
+
         protected override void BeforeRun()
         {
             Console.WriteLine("Coderdojo OS " + ver + " build " + build);
-            var fs = new Sys.FileSystem.CosmosVFS();
+             fs = new Sys.FileSystem.CosmosVFS();
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
             Console.WriteLine("Coderdojo OS został załadowny poprawnie\n");
+            var userPasswd = @"0:\userPasswd.pass";
+
+            if (!File.Exists(userPasswd))
+            {
+                File.Create(userPasswd);
+                File.WriteAllText(@"0:\userPasswd.pass", "toor");
+            }
+            User.password = File.ReadAllText(@"0:\userPasswd.pass");
         }
 
         protected override void Run()
@@ -38,7 +46,7 @@ namespace CoderdojoOS
             var login = Console.ReadLine();
             Console.Write("\nHasło: ");
             var pass = Console.ReadLine();
-            if (login == User.login && pass == User.password)
+            if (login == User.login && pass == File.ReadAllText(@"0:\userPasswd.pass"))
             {
                 Console.WriteLine("\nHasło zaakceptowane\n");
 
@@ -50,8 +58,8 @@ namespace CoderdojoOS
                     }
                     try
                     {
-                        Console.Write(login + ">");
-                         cmd = Console.ReadLine();
+                        Console.Write(login + "" + ls + " $");
+                        cmd = Console.ReadLine();
                         if (cmd == "logout")
                         {
                             break;
@@ -121,14 +129,14 @@ namespace CoderdojoOS
             {
                 Sys.Power.Reboot();
             }
-            else if (cmd == "change password")
+            else if (commandName == "passwd")
             {
                 try
                 {
                     string passwd;
                     Console.Write("actual password: ");
                     passwd = Console.ReadLine();
-                    if (passwd == User.password)
+                    if (passwd == File.ReadAllText(@"0:\userPasswd.pass"))
                     {
                         NewPassword();
                     }
@@ -172,6 +180,10 @@ namespace CoderdojoOS
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
             }
+            else if (commandName == "mkdir" || commandName == "makedir" || commandName == "createf")
+            {
+                MkDir(command[1]);
+            }
             else if (commandName == "pauze")
             {
                 Console.WriteLine("Pres any ki tu kontiniju");
@@ -185,7 +197,7 @@ namespace CoderdojoOS
             {
                 try
                 {
-                    string Adr = command[1];
+                    string Adr = ls;
                     Console.WriteLine(Directory.GetFiles(Adr));
                 }
                 catch (Exception ex)
@@ -212,6 +224,10 @@ namespace CoderdojoOS
         //#############################//
         //          metody             //
         //#############################//
+        public void MkDir(string Folder)
+        {
+            Directory.CreateDirectory(Folder);
+        }
         public void Crash(string code)
         {
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -343,7 +359,9 @@ namespace CoderdojoOS
         }
         public void Echo(string[] echoCommand)
         {
-
+            Console.WriteLine("Echo: Co chcesz żebym powtórzył? ");
+            var czyt = Console.ReadLine();
+            Console.WriteLine(czyt);
 
         }
 
@@ -374,13 +392,16 @@ namespace CoderdojoOS
         {
             while (true)
             {
-                Console.WriteLine("nowe haslo: ");
+                Console.Write("Nowe haslo: ");
                 var checkPasswd = Console.ReadLine();
-                Console.WriteLine("powtorz nowe haslo: ");
+                Console.Write("\npowtorz nowe haslo: ");
                 var passwd = Console.ReadLine();
+                Console.WriteLine();
                 if (checkPasswd == passwd)
                 {
-                    User.password = passwd;
+                    File.Delete(@"0:\userPasswd.pass");
+                    File.Create(@"0:\userPasswd.pass");
+                    File.WriteAllText(@"0:\userPasswd.pass", passwd);
                     break;
                 }
                 else
@@ -391,18 +412,19 @@ namespace CoderdojoOS
 
 
         }
-   
-        
-
-        
-
-            
-
-
-
-        
-        //############//
-        //shell begone//
-        //############//
+        public void CreateFile(string file)
+        {
+            if (!File.Exists(file))
+            {
+                File.Create(file);
+            }
+            else
+            {
+                Console.WriteLine("Plik już istnieje. Żadna edycja nie została wprowadona.");
+            }
+        }
+        //################//
+        //# shell begone #//
+        //################//
     }
 }
