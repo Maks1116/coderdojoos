@@ -7,6 +7,7 @@ using Sys = Cosmos.System;
 using Cosmos.System.Graphics;
 using CoderdojoOS2;
 using Cosmos.System.FileSystem;
+using System.Drawing;
 
 namespace CoderdojoOS
 {
@@ -16,7 +17,7 @@ namespace CoderdojoOS
         public static uint build = 15;
 
         public bool crash = false;
-
+        Canvas canvas;
         public FormatException ex;
         public static string cmd;
         public static CosmosVFS fs = new CosmosVFS();
@@ -25,6 +26,7 @@ namespace CoderdojoOS
 
         protected override void BeforeRun()
         {
+       
             Console.WriteLine("Coderdojo OS " + ver + " build " + build);
              fs = new Sys.FileSystem.CosmosVFS();
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
@@ -105,6 +107,8 @@ namespace CoderdojoOS
         //###############//
 
         public string[] command = new string[Int32.MaxValue];
+        internal static string file;
+
         public void Handler(string rawCommand)
         {
 
@@ -175,6 +179,10 @@ namespace CoderdojoOS
 
                 Textcolor(command[1]);
             }
+            else if(cmd == "miv")
+            {
+                notepad();
+            }
             else if (commandName == "pause")
             {
                 Console.WriteLine("Press any key to continue");
@@ -215,6 +223,10 @@ namespace CoderdojoOS
                 {
                     Console.WriteLine(ex);
                 }
+            }
+            else if(commandName == "miv")
+                {
+                notepad();
             }
             else
             {
@@ -422,6 +434,10 @@ namespace CoderdojoOS
             {
                 Console.WriteLine("Plik już istnieje. Żadna edycja nie została wprowadona.");
             }
+        }
+        public void notepad()
+        {
+            MIV.StartMIV();
         }
         //################//
         //# shell begone #//
