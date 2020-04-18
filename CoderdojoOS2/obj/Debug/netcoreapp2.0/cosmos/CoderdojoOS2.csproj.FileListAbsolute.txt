@@ -1,0 +1,9 @@
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\bin\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.deps.json
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\bin\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.dll
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\bin\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.pdb
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\obj\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.csprojAssemblyReference.cache
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\obj\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.csproj.CoreCompileInputs.cache
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\obj\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.AssemblyInfoInputs.cache
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\obj\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.AssemblyInfo.cs
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\obj\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.dll
+C:\Users\Maks_\source\repos\CoderdojoOS2\CoderdojoOS2\obj\Debug\netcoreapp2.0\cosmos\CoderdojoOS2.pdb
